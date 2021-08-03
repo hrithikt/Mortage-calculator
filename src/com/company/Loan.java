@@ -12,13 +12,10 @@ public class Loan {
     private float monthlyInterestRate;
     private int numberOfPayments;
 
-    public Loan() {
-        principal = (int) InputConsole.readNumber("Principal", 1_000, 1_000_000);
-        float annualInterestRate = (float) InputConsole.readNumber("Annual Interest Rate", 1, 30);
-        int period = (int) InputConsole.readNumber("Period", 1, 30);
-
-        monthlyInterestRate = annualInterestRate /PERCENT/MONTHS_IN_A_YEAR;
-        numberOfPayments = (period *MONTHS_IN_A_YEAR);
+    public Loan(int principal, float annualInterestRate, int period) {
+        this.principal = principal;
+        this.monthlyInterestRate = annualInterestRate /PERCENT/MONTHS_IN_A_YEAR;
+        this.numberOfPayments = (period *MONTHS_IN_A_YEAR);
     }
 
     public void printMortgage(){
