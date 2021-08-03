@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 
 public class MortgageReport {
 
-    private Loan loanCalculator;
+    private final Loan loanCalculator;
 
     public MortgageReport(Loan loanCalculator){
         this.loanCalculator = loanCalculator;
@@ -22,9 +22,9 @@ public class MortgageReport {
         System.out.println();
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("----------------");
-        for(int paymentsMade = 1; paymentsMade <= loanCalculator.getNumberOfPayments(); paymentsMade++){
-            double balance = loanCalculator.calculateBalance(paymentsMade);
-            System.out.println(NumberFormat.getCurrencyInstance().format(balance));
+        double[] paymentSchedule = loanCalculator.getPaymentSchedule();
+        for (double v : paymentSchedule) {
+            System.out.println(NumberFormat.getCurrencyInstance().format(v));
         }
     }
 }

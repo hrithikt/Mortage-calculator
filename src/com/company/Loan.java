@@ -8,18 +8,14 @@ public class Loan {
     final byte MONTHS_IN_A_YEAR = 12;
     final byte PERCENT = 100;
 
-    private int principal;
-    private float monthlyInterestRate;
-    private int numberOfPayments;
+    private final int principal;
+    private final float monthlyInterestRate;
+    private final int numberOfPayments;
 
     public Loan(int principal, float annualInterestRate, int period) {
         this.principal = principal;
         this.monthlyInterestRate = annualInterestRate /PERCENT/MONTHS_IN_A_YEAR;
         this.numberOfPayments = (period *MONTHS_IN_A_YEAR);
-    }
-
-    public int getNumberOfPayments(){
-        return numberOfPayments;
     }
 
     public double calculateMortgage(){
@@ -28,6 +24,14 @@ public class Loan {
 
     public double calculateBalance(int paymentsMade){
         return principal*(Math.pow(1+monthlyInterestRate,numberOfPayments)-Math.pow(1+monthlyInterestRate,paymentsMade))/(Math.pow(1+monthlyInterestRate,numberOfPayments)-1);
+    }
+
+    public double[] getPaymentSchedule() {
+        double[] balances = new double[numberOfPayments];
+        for (int paymentsMade = 1; paymentsMade <= numberOfPayments; paymentsMade++) {
+            balances[paymentsMade - 1] = calculateBalance(paymentsMade);
+        }
+        return balances;
     }
 }
 
